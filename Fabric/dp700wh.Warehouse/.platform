@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Warehouse",
+    "displayName": "dp700wh"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6633c7ea-ce0e-a681-497d-884ce2a6ec98"
+  }
+}
