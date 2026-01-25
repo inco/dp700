@@ -1,0 +1,43 @@
+Front,Back
+What is OneLake?,A unified storage and catalog layer for Microsoft Fabric that provides a single logical data lake view across the tenant
+Name three ingestion methods in Microsoft Fabric.,Dataflow Gen2 (Power Query), Pipelines (Data Factory), Direct connector ingestion (e.g., Eventstreams)
+What is a Lakehouse?,An architecture combining data lake storage with structured, managed tables (e.g., Delta) to support both analytical workloads and data engineering
+What is a Delta table?,A transactional table format (Delta) built on top of Parquet with ACID guarantees and optimized metadata for lakehouse workloads
+When would you use Dataflow Gen2 vs a Notebook?,Use Dataflow Gen2 for low-code ETL and business-user-friendly transformations, use Notebooks for complex PySpark transformations and custom code
+What is Eventhouse?,A Fabric service for collecting and persisting streaming data, often used with Eventstreams for real-time pipelines
+What is a Shortcut in Fabric?,A metadata pointer to data (a virtual table) that references external storage without data duplication
+Define row-level security.,Access control that restricts access to rows in tables based on user attributes or roles
+Define column-level security.,Access control that restricts access to sensitive columns for certain users or roles
+What is dynamic data masking?,A method to obfuscate sensitive data at query time without changing underlying data
+What are sensitivity labels used for?,Classifying and protecting sensitive content with policies such as encryption and access controls
+Name two ways to implement incremental loads.,Watermarking with timestamps and Change Data Capture (CDC) patterns
+What is KQL used for in Fabric?,Kusto Query Language (KQL) is used for high-speed log/telemetry and streaming queries and exploratory analytics
+What is Spark structured streaming?,A Spark API for processing streaming data with micro-batch or continuous processing modes
+How do you monitor a pipeline in Fabric?,Use the Fabric workspace monitoring tools, pipeline run history, logs, and alerts configured in the workspace
+What is Unity Catalog?,A centralized catalog for data governance, access control, and metadata management across Fabric
+List a common performance tuning technique for lakehouse tables.,Optimize layout (file sizes, partitioning) and run OPTIMIZE/REPLACE to compact files and improve query performance
+What is an Eventstream?,A low-latency ingest path for real-time streaming data, often used with Eventhouse and Spark structured streaming
+What is an accelerated shortcut?,A shortcut type optimized for faster query performance in Real-Time scenarios using materialized data
+How to handle late-arriving data?,Use watermarking, left-join patterns with deduplication logic, or corrective reprocessing
+What is a database project in Fabric lifecycle management?,A workspace artifact that enables source control and CI/CD for database schema changes and deployments
+What does RBAC stand for?,Role-Based Access Control
+Give an example of a pipeline trigger.,Schedule trigger (daily), event-based trigger (blob creation), manual trigger
+Name three troubleshooting steps for a failing notebook.,Check job logs, re-run small inputs locally, review stack trace and package / dependency issues
+What is denormalization used for in analytics?,To reduce join complexity and improve query performance by duplicating data into denormalized structures
+What is a semantic model refresh?,Refreshing the semantic (metrics/aggregations) layer so dashboards and reports reflect latest data
+How do you test a security policy in Fabric?,Create test users/roles, run queries and validate access restrictions and masking
+What are best practices for partitioning?,Partition on high-cardinality date or ingestion columns, avoid too small files, balance partition count vs file size
+What is the purpose of sensitivity labeling in datasets?,To enforce protection and classification rules on data assets across Fabric
+Name two kinds of errors to simulate for error drills.,Pipeline errors (bad source), Notebook errors (code exceptions), Eventstream errors (schema mismatch)
+What is the primary language for Spark in Fabric?,PySpark (Python) is commonly used; Scala and SQL are also supported
+How often should you do spaced-repetition reviews?,Daily reviews for new/weak cards, then follow 1d → 3d → 7d → 30d schedule
+What is an eventstream windowing function used for?,Aggregating streaming events over time windows (e.g., tumbling, sliding windows)
+What should you log when diagnosing a job failure?,Error messages, stack trace, input sample and configuration/parameters
+What is mirroring in Fabric?,Replicating data copies for locality or performance (e.g., mirrored storage for Real-Time shortcuts)
+How to measure query performance improvement?,Compare query duration and resource usage before and after optimization
+What is a materialized view vs shortcut?,Materialized view stores precomputed results, a shortcut references external data without copying it
+What is the recommended file size range for parquet files in lakehouses?,Typically 100MB to 1GB per file depending on workload and query patterns
+What is a best practice for CI/CD with Fabric?,Use database projects, source control, and deployment pipelines to manage schema and artifact changes
+What is a typical failure cause in streaming pipelines?,Schema drift, late events, checkpoint loss, or misconfigured sinks
+What is OneLake security?,Access and data protection controls applied at OneLake (tenant) level for files and items
+What are common monitoring alerts to configure?,Ingestion failures, long-running jobs, high-latency queries, and refresh failures
