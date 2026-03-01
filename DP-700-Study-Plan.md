@@ -262,6 +262,28 @@ This study plan is supported by additional files to enhance your preparation:
 - **[practice-questions-by-objective.md](practice-questions-by-objective.md)** - 54 scenario-based practice questions covering all exam objectives with detailed explanations
 - **[anki_dp700_cards.csv](anki_dp700_cards.csv)** - Flashcard deck for Anki (import for spaced repetition practice)
 - Review mistakes immediately and schedule them for spaced repetition
+
+### Weekly Task Files (Recommended Format)
+- **[tasks/README.md](tasks/README.md)** - Index and navigation for all weekly task files (start here!)
+- **[tasks/week0.md](tasks/week0.md)** - Setup & Environment configuration (1-3 days)
+- **[tasks/week1.md](tasks/week1.md)** - Data Ingestion (4 modules, 3 labs)
+- **[tasks/week2.md](tasks/week2.md)** - Lakehouse Architecture (4 modules, 3 labs)
+- **[tasks/week3.md](tasks/week3.md)** - Data Transformation (3 modules, 3 labs)
+- **[tasks/week4.md](tasks/week4.md)** - Real-Time Intelligence (5 modules, 4 labs)
+- **[tasks/week5.md](tasks/week5.md)** - Data Warehouse & Modeling (6 modules, 4 labs)
+- **[tasks/week6.md](tasks/week6.md)** - Management & Security (4 modules, 4 labs)
+- **[tasks/week7.md](tasks/week7.md)** - Governance & Monitoring (review, 3 labs, error resolution)
+- **[tasks/week8.md](tasks/week8.md)** - Final Review & Exam Prep (3 practice exams, light review)
+
+### Exam Simulator & Question Database
+- **[EXAM_SIMULATOR_README.md](EXAM_SIMULATOR_README.md)** - Complete guide for the Python exam simulator
+- **[EXAM_SIMULATOR_QUICKSTART.md](EXAM_SIMULATOR_QUICKSTART.md)** - 30-second start guide
+- **[exam_simulator.py](exam_simulator.py)** - The exam simulator application (run with `python exam_simulator.py`)
+- **[questions.md](questions.md)** - Question database in Markdown format (add your practice test questions here!)
+- **[AUTO_FORMAT_QUICKSTART.md](AUTO_FORMAT_QUICKSTART.md)** - **RECOMMENDED:** Auto-formatting tool guide
+- **[auto_format_questions.py](auto_format_questions.py)** - Automatically format questions while you take exams (no manual copy-paste needed!)
+- **[exam_scores.json](exam_scores.json)** - Auto-generated score history and tracking
+
 ### Community Resources Integration
 - **[using-community-resources.md](using-community-resources.md)** - Complete guide for using Shabnam Watson's study materials (Excel tracker, Power BI dashboard, study notes, YouTube tips)
 - Use public study groups / Discord / Slack for accountability

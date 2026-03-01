@@ -9,11 +9,11 @@
 ### Daily Commitment: 30-45 minutes
 ### Practice Tasks:
 1. **Environment Setup** (Day 1-2)
-   - [ ] Sign up for [Microsoft Fabric free trial](https://learn.microsoft.com/fabric/get-started/fabric-trial)
-   - [ ] Install [Power BI Desktop](https://powerbi.microsoft.com/desktop/)
-   - [ ] Install [VS Code](https://code.visualstudio.com/) with Python extension
-   - [ ] Set up [Git](https://git-scm.com/) and create a GitHub repo for notes/labs
-   - [ ] Install [Anki](https://apps.ankiweb.net/) for flashcards
+   - [x] Sign up for [Microsoft Fabric free trial](https://learn.microsoft.com/fabric/get-started/fabric-trial)
+   - [x] Install [Power BI Desktop](https://powerbi.microsoft.com/desktop/)
+   - [x] Install [VS Code](https://code.visualstudio.com/) with Python extension
+   - [x] Set up [Git](https://git-scm.com/) and create a GitHub repo for notes/labs
+   - [x] Install [Anki](https://apps.ankiweb.net/) for flashcards
 
 2. **Baseline Knowledge Check** (Day 3)
    - [ ] Take the free [DP-700 Practice Assessment](https://learn.microsoft.com/credentials/certifications/fabric-data-engineer-associate/practice/assessment?assessment-type=practice&assessmentId=87) (no login required for preview)

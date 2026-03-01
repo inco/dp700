@@ -1,0 +1,6 @@
+# No external dependencies required
+# This exam simulator uses only Python standard library
+
+# The following optional packages can enhance the experience:
+# - colorama (for colored terminal output)
+# To install: pip install colorama
