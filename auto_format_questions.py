@@ -93,9 +93,35 @@ class QuestionFormatter:
         
         return markdown
 
+    def extract_question_blocks_from_markdown(self, text, start_question_num):
+        """Extract already-formatted question blocks from extension markdown and renumber them."""
+        blocks = re.findall(r'## Question\s+\d+\s*\n(.*?)(?=\n---\s*\n|\Z)', text, re.DOTALL)
+        if not blocks:
+            return []
+
+        formatted_blocks = []
+        next_num = start_question_num
+        for block in blocks:
+            cleaned = block.strip()
+            if not cleaned:
+                continue
+            formatted = f"## Question {next_num}\n\n{cleaned}\n\n---\n\n"
+            formatted_blocks.append(formatted)
+            next_num += 1
+
+        return formatted_blocks
+
     def append_to_file(self, content):
-        """Append formatted question to questions.md"""
+        """Append formatted question to questions.md if not already present"""
         try:
+            # check for duplicates
+            if os.path.exists(self.questions_file):
+                with open(self.questions_file, 'r', encoding='utf-8') as f:
+                    existing = f.read()
+                # simple check: identical block already saved
+                if content.strip() in existing:
+                    print("➖ Duplicate question detected; skipping")
+                    return False
             with open(self.questions_file, 'a', encoding='utf-8') as f:
                 f.write(content)
             return True
@@ -147,28 +173,20 @@ class QuestionFormatter:
                 break
             
             if raw_text and len(raw_text) > 20:
-                # Format the question
-                formatted = self.format_question(raw_text, question_num)
-                
-                # Show preview
-                print("\n📋 Preview:")
-                print(formatted)
-                
-                # Confirm
-                confirm = input("Save this question? (yes/no/edit): ").strip().lower()
-                
-                if confirm == 'yes':
+                    # Format the question
+                    formatted = self.format_question(raw_text, question_num)
+                    
+                    # Show preview
+                    print("\n📋 Preview:")
+                    print(formatted)
+                    
+                    # automatically save without asking
                     if self.append_to_file(formatted):
                         print(f"✅ Question #{question_num} saved!")
                         count += 1
                         question_num += 1
                     else:
-                        print("❌ Failed to save")
-                elif confirm == 'edit':
-                    print("Manually edit in: " + self.questions_file)
-                    break
-                # else: skip
-        
+                        print("❌ Failed to save or skipped duplicate")
         print(f"\n✅ Saved {count} questions to {self.questions_file}")
         print("\n💡 Next steps:")
         print("1. Open questions.md in VS Code")
@@ -191,8 +209,7 @@ class QuestionFormatter:
         print("As you copy questions during your exam, they'll be auto-formatted!")
         print("\nCommands:")
         print("  - Paste: Automatically detects and formats questions")
-        print("  - Type 'm': Switch to manual input")
-        print("  - Type 'q': Quit\n")
+        print("  - Press Ctrl+C to quit\n")
         
         question_num = self._get_next_question_number()
         count = 0
@@ -204,6 +221,37 @@ class QuestionFormatter:
                 # Check if clipboard changed
                 if current_clipboard != self.last_clipboard and len(current_clipboard) > 50:
                     self.last_clipboard = current_clipboard
+
+                    # Case 1: Extension-exported markdown with one or more question blocks
+                    if self._looks_like_extension_export(current_clipboard):
+                        print("\n🎯 Extension markdown detected")
+                        blocks = self.extract_question_blocks_from_markdown(current_clipboard, question_num)
+
+                        if not blocks:
+                            print("❌ Could not parse question blocks from extension markdown")
+                            time.sleep(1)
+                            continue
+
+                        print(f"Found {len(blocks)} question block(s)")
+                        # filter out duplicates using file contents
+                        if os.path.exists(self.questions_file):
+                            with open(self.questions_file, 'r', encoding='utf-8') as f:
+                                existing = f.read()
+                            orig_len = len(blocks)
+                            blocks = [b for b in blocks if b.strip() not in existing]
+                            dup_count = orig_len - len(blocks)
+                            if dup_count > 0:
+                                print(f"⏳ Skipping {dup_count} already-saved block(s)")
+                        # automatically save all remaining blocks
+                        saved_now = 0
+                        for block in blocks:
+                            if self.append_to_file(block):
+                                saved_now += 1
+                                question_num += 1
+                        count += saved_now
+                        print(f"✅ Saved {saved_now} question(s)")
+                        time.sleep(1)
+                        continue
                     
                     # Check if it looks like an exam question
                     if self._looks_like_question(current_clipboard):
@@ -257,10 +305,20 @@ class QuestionFormatter:
         """Check if text looks like an exam question"""
         # Should have question mark and some options
         has_question_mark = '?' in text
-        has_options = bool(re.search(r'^[A-D]\)', text, re.MULTILINE))
+        has_options = bool(
+            re.search(r'^[A-D]\)', text, re.MULTILINE) or
+            re.search(r'^\s*-\s*\[\s*\]\s*[A-D]\)', text, re.MULTILINE)
+        )
         has_length = len(text) > 50
         
         return has_question_mark and has_options and has_length
+
+    def _looks_like_extension_export(self, text):
+        """Detect markdown exported by the browser extension."""
+        return (
+            '# DP-700 Practice Assessment Questions' in text and
+            bool(re.search(r'## Question\s+\d+', text))
+        )
 
 
 def main():
@@ -274,9 +332,9 @@ def main():
     print("2) Manual Input (type/paste questions one by one)")
     print("3) Exit")
     
-    choice = input("\nChoice (1-3): ").strip()
+    choice = input("\nChoice (1-3) [default 1]: ").strip()
     
-    if choice == '1':
+    if choice == '' or choice == '1':
         formatter.clipboard_monitor_mode()
     elif choice == '2':
         formatter.manual_input_mode()

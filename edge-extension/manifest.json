@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "DP-700 Question Capturer",
+  "version": "1.0.0",
+  "description": "Automatically capture questions from Microsoft Learn practice assessments for DP-700 exam prep",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://learn.microsoft.com/*",
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "Capture DP-700 Question"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://learn.microsoft.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
